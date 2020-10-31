@@ -8,15 +8,15 @@ CREATE TABLE IF NOT EXISTS roles (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO roles (description) VALUES ('client'), ('admin');
+INSERT INTO roles (description) VALUES ('clientes'), ('admin');
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS usuarios (
     id int NOT NULL AUTO_INCREMENT,
-    username varchar(255) NOT NULL,
-    fullname varchar(255) NOT NULL,
+    usuario varchar(255) NOT NULL,
+    nombre_apellido varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
-    cellphone varchar(255) NOT NULL,
-    shippingAddress varchar(255) NOT NULL,
+    telefono varchar(255) NOT NULL,
+    direccion varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     roleId int DEFAULT NULL,
     PRIMARY KEY (id),
@@ -24,13 +24,13 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT users_ibfk_1 FOREIGN KEY (roleId) REFERENCES roles (id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO users 
-(username, fullname, email, cellphone, shippingAddress, password, roleId) 
-VALUES ("user_admin","My fullname admin","admin@admin.com","0123456789","Calle 10","admin123", 2);
+INSERT INTO usuarios
+(usuario, nombre_apellido, email, telefono, direccion, password, roleId) 
+VALUES ("u_Admin","Julian Montoya","jmadmin@admin.com","3154878965","Calle 45","Jmadmin20*", 2);
 
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE IF NOT EXISTS productos (
     id int NOT NULL AUTO_INCREMENT,
     description varchar(255) NOT NULL,
-    price decimal(10,0) NOT NULL,
+    precio decimal(10,0) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

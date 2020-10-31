@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 const SECRET = "70k3n1d";
 const ADMIN_IDROLE = 2;
 
-const validateLogin = (req, res, next) => {
+const validarLogin = (req, res, next) => {
     try {
-        const { username, password } = req.body;
-        if ((!username) && password)
-            return res.status(400).json({ error: "No Login 1" });
+        const { usuario, contrasena } = req.body;
+        if (!usuario || !contrasena)
+            return res.status(400).json({ error: "Falta Usuario o Contraseña" });
             next();
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -103,7 +103,7 @@ function validarTipoDato(req, res, next) {
 } */
 
 module.exports = {
-    validateLogin,
+    validarLogin,
     validateToken
     /* validarSiExiste,
     validarProducto,

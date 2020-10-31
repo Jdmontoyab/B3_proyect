@@ -1,7 +1,7 @@
 {
   "name": "proyect",
   "version": "1.0.0",
-  "description": "",
+  "description": "API delilahresto",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/Jdmontoyab/B3_proyect.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["API"],
+  "author": "Jdmontoyab",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jdmontoyab/B3_proyect/issues"

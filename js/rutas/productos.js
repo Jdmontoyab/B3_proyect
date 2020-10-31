@@ -1,10 +1,10 @@
 const router = require("express").Router();
 
-const { validateToken } = require("../middlewares/users");
+const { validateToken } = require("../middlewares/usuarios");
 
 //const { validateRequest } = require("../middlewares/products");
 
-const access = require("../database/access/products");
+const access = require("../basededatos/acceso/productos");
 
 router.post("/", validateToken, async (req, res) => {
     //res.send('ok Funcionó')

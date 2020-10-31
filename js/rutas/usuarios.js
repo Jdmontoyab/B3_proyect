@@ -1,37 +1,33 @@
 const router = require("express").Router();
 
-const { validateLogin } = require("../middlewares/users");
+const { validarLogin } = require("../middlewares/usuarios");
 
 const jwt = require("jsonwebtoken");
-const access = require("../database/access/users");
+const acceso = require("../basededatos/acceso/usuarios");
 
 const SECRET = "70k3n1d";
 
-router.post("/login", validateLogin, async (req, res) => {
+router.post("/login", validarLogin, async (req, res) => {
   try {
-      const { password } = req.body;
-      //console.log(password);
+      const usuario = await acceso.encontrarPorUsuario(req.body);
 
-      const user = await access.findByUsername(req.body);
+      const { contrasena } = req.body;
 
-      //console.log(user[0].password);
-
-      if (!user.length) {
-        return res.status(401).json({ error: "No Login 2" });
+      if (!usuario.length) {
+        return res.status(401).json({ error: "Datos no validados" });
       }
     
-      if (user[0].password == password) {
+      if (usuario[0].password == contrasena) {
         const payload = {
-          id: user[0].id,
-          roleId: user[0].roleId,
-          user: user[0].username
+          id: usuario[0].id,
+          roleId: usuario[0].roleId,
+          user: usuario[0].usuario
         }
 
         const token = jwt.sign(payload, SECRET);
-        console.log(token);
         return res.header("auth-token", token).json({ token });
       } else {
-        return res.status(401).json({ error: "No Login 3" });
+        return res.status(401).json({ error: "Error datos de ingreso" });
       }
     } catch (error) {
       res.status(401).json({ error: error.message });
