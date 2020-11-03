@@ -4,50 +4,88 @@ API para realizar pedidos de comida italiana. Los clientes pueden registrarse, v
 
 ## Clonar y usar repositorio de Git
 
-Para descargar el repositorio de GitHub, sigue el link del repositorio, click en el botón "Clonar" ("Clone"), 
-
-To download the GitHub repository, go to the repository link, click the "Clone" button, and then type the command "Git clone followed by the Delilah Resto repository link" on your computer.
+Para descargar el repositorio de GitHub, sigue el link del repositorio, click en el botón "Clonar" ("Clone"), dirigete a la terminal y escribe el comando "git clone seguido del link del repositorio clonado".
 
 ```bash
 git clone
 ```
 
-In that way, you'll be able to work on the project. If you have Git Bash and you want to open Visual Studio with your entire project, you have to run the "code ." command (while in the folder that contains it).
+## Instalar Dependencias
 
-```bash
-code .
-```
-
-## Install dependencies
-
-To install the dependencies, you must go to the server folder in Visual Studio Code, open the terminal and execute the command:
+Para instalar las dependencias, debes ejecutar en la terminal el comando:
 
 ```bash
 npm install
 ```
 
-## User password
+## Conectarse a la base de datos
 
-The main recommendation is that when you log in to phpmyadmin, change the root password, which usually comes up empty. In this project I left it empty, but you can put yours in if you want.
+Debes iniciar sección en MySQL Workbench con tu usuario y contraseña. Estos parámetros de entrada se deben configurar en el archivo index.js que se encuentra en la ruta:
 
-## Create database with its tables
+```bash
+..\B3_proyect\js\basededatos\index.js
+```
+Especificamente en la linea 4, dónde se configuran los parámetros de conexión a la base de datos y que por defecto tienen como usuario "root" y como contraseña "CONFIG_PASSWORD"
 
-To do this, open the delilahresto.sql file located in the database folder, copy everything inside that file, go to phpmyadmin, paste all of the above as a query and click the "Continue" button.
 
-## lift the server
+## Crear base de datos y sus tablas
 
-Go to the server folder, open the terminal and run the following command:
+Dirígete al archivo "delilahresto.sql" que se encuentra en la ruta:
+
+```bash
+..\B3_proyect\js\basededatos\archivo\delilahresto.sql
+```
+Copia todo su contenido, pégalo en un nuevo SQL tab y ejecutalo.
+
+## Iniciar la aplicación
+
+Dirígete a la carpeta "js", abre la terminal y ejecuta el comando:
 
 ```bash
 node index.js
 ```
 
-## YAML Documentation
+## Documentación swagger.yaml
 
-To create, update and/or delete users, products and orders in Postman, look at the yaml file inside the server folder; there you will find the api documentation along with the verbs to be executed
+En el archivo swagger.yaml se encuentran los requerimientos que se deben enviar en el body utilizando postman para ejecutarlos.
 
+# URLs de los endpoints
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## Usuarios
 
-Please make sure to update tests as appropriate.
+Método: POST (Login Usuario)
+URL: http://localhost:3000/api/usuarios/login
+
+Método: POST (Crear Usuario)
+http://localhost:3000/api/usuarios/crear
+
+## Productos
+
+Método: POST (Crear Productos)
+URL: http://localhost:3000/api/productos/
+
+Método: GET (Consultar Productos)
+URL: http://localhost:3000/api/productos/
+URL: http://localhost:3000/api/productos/id
+
+Método: PUT (Actualizar Producto)
+URL: http://localhost:3000/api/productos/id
+
+Método: DELETE (Eliminar Producto)
+URL: http://localhost:3000/api/productos/id
+
+## Pedidos
+
+Método: POST (Crear Pedido)
+URL: http://localhost:3000/api/pedidos/crear
+
+Método: GET (Consultar Pedidos)
+URL: http://localhost:3000/api/pedidos/
+URL: http://localhost:3000/api/pedidos/id
+
+Método: PUT (Actualizar Pedido)
+URL: http://localhost:3000/api/pedidos/id
+
+Método: DELETE (Eliminar Pedido)
+URL: http://localhost:3000/api/pedidos/id
+

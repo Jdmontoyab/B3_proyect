@@ -7,11 +7,11 @@ const port = 3000;
 
 const rutaUsuarios = require("./rutas/usuarios");
 const rutaProductos = require("./rutas/productos");
-//const rOrders = require("./routes/orders");
+const rutaPedidos = require("./rutas/pedidos");
 
 app.use("/api/usuarios", rutaUsuarios);
 app.use("/api/productos", rutaProductos);
-//app.use("/api/v1/orders", rOrders);
+app.use("/api/pedidos", rutaPedidos);
 
 app.listen(port, () => {
     console.log('Servidor iniciado en el puerto: ' + port);

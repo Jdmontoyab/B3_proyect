@@ -7,14 +7,15 @@ const encontrarPorUsuario = async (body) => {
         { type: basededatos.sequelize.QueryTypes.SELECT });
 };
 
-/* const createUser = async (body) => {
+const crear = async (body) => {
   return await basededatos.sequelize.query(
-    `INSERT INTO USERS (email, password, username, fullname, cellphone, shippingAddress, roleId) 
-     VALUES ("${body.email}","${body.password}","${body.username}","${body.fullname}", "${body.cellphone}", "${body.shippingAddress}", ${body.roleId});`,
+    `INSERT INTO USUARIOS (usuario, nombre_apellido, email, telefono, direccion, password, roleId) 
+     VALUES ("${body.usuario}","${body.nombre_apellido}","${body.email}","${body.telefono}", "${body.direccion}", "${body.password}", ${body.roleId});`,
     { type: basededatos.sequelize.QueryTypes.INSERT }
   );
-}; */
+};
 
 module.exports = {
-  encontrarPorUsuario
+  encontrarPorUsuario,
+  crear
 };

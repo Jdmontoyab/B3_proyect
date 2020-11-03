@@ -1,20 +1,59 @@
 const router = require("express").Router();
 
-const { validateToken } = require("../middlewares/usuarios");
+const { validarToken, validarPermisos } = require("../middlewares/usuarios");
 
-//const { validateRequest } = require("../middlewares/products");
+const { validarPeticion } = require("../middlewares/productos");
 
-const access = require("../basededatos/acceso/productos");
+const acceso = require("../basededatos/acceso/productos");
 
-router.post("/", validateToken, async (req, res) => {
-    //res.send('ok Funcionó')
+router.post("/", validarPeticion, validarToken, validarPermisos, async (req, res) => {
     try {
-        await access.createProduct(req.body);
+        await acceso.crearProducto(req.body);
         res.json(req.body);
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
     }
 );
+
+router.get("/", validarToken, async (req, res) => {
+  try {
+    const productos = await acceso.encontrarTodos();
+    res.json(productos);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.put("/:id", validarPeticion, validarToken, validarPermisos, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let producto = await acceso.encontrarPorId(id);
+      if (!producto.length) {
+        return res.status(404).json({ error: "El Producto buscado no existe!" });
+      }
+      await acceso.actualizar(id, req.body);
+      res.json(req.body);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+);
+
+router.delete("/:id", validarToken, validarPermisos, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    let producto = await acceso.encontrarPorId(id);
+    if (!producto.length) {
+      return res.status(404).json({ error: "El Producto buscado no existe!" });
+    }
+    await acceso.eliminar(id);
+    res.json({ message: "Producto Eliminado Correctamente" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 module.exports = router;

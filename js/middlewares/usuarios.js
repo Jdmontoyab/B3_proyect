@@ -14,98 +14,64 @@ const validarLogin = (req, res, next) => {
         }
 };
 
-const validateToken = async (req, res, next) => {
+const validarCrearUsuario = (req, res, next) => {
+    const { usuario, nombre_apellido, email, telefono, direccion, password, roleId } = req.body;
+    if(usuario && nombre_apellido && email && telefono && direccion && password && roleId) {
+        if (typeof(usuario) === "string"
+        && typeof(nombre_apellido) === "string"
+        && typeof(email) === "string"
+        && typeof(telefono) === "string"
+        && typeof(direccion) === "string"
+        && typeof(password) === "string"
+        && typeof(roleId) === "number"){
+            if (roleId !==1 && roleId !==2){
+                return res.status(400).json('El rol de usuario debe ser 1 para Clientes o 2 para Administrador');
+            }
+            if (password.length < 6) {
+                return res.status(400).json('La contraseña debe tener al menos 6 caracteres');
+            }
+            next();
+        } else {
+            res.status(400).json('Datos Erroneos');
+        }
+    } else {
+        res.status(400).json('Datos Erroneos o Incompletos');
+    };
+};
+
+const validarToken = async (req, res, next) => {
 try {
     const token = req.headers.authorization.split(' ')[1];
     console.log(token);
-    if (!token) return res.status(401).json({ error: "Access denied. 1" });
+    if (!token) return res.status(401).json({ error: "Acceso no Autorizado" });
   
     await jwt.verify(token, SECRET, (error, data) => {
-        if (error) return res.status(401).json({ error: "Access denied. 2" });
-            req.body.userId = data.id;
-            req.body.roleId = data.roleId;
-            next();
+        if (error) return res.status(401).json({ error: "Acceso no Autorizado" });
+        req.body.id = data.id;
+        req.body.roleId = data.roleId;
+        next();
         });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
 };
 
-/* const validarCrear = (req, res, next) => {
-    let usuario = req.body;
-    res.send
-    if(typeof(usuario.Usuario) === "string" 
-        && typeof(usuario.NombreCompleto) === "string" 
-        && typeof(usuario.email) ==="string" 
-        && typeof(usuario.Telefono) === "number" 
-        && typeof(usuario.DireccionEnvio)  ==="string" 
-        && typeof(usuario.Contraseña) ==="string"
-        && typeof(usuario.RolUsuario === "number") ){
-
-            //validando RolUsuario
-            if (usuario.RolUsuario !== 1 && usuario.RolUsuario !== 2 ) {
-                return res.send('Debe ingresar el número 1 para Rol de ADMIN ó el número 2 para Rol CLIENTE');
-            }
-
-            //validando longitud de constraseña (6 caracteres permitidos)
-            if(usuario.Contraseña.length !== 6){
-                return res.send("Contraseña invalida")
-            }
-       
-            next();
-        }else{res.send("Asegurese de haber ingresado los datos correctamente")}
-    }else{res.send("datos incompletos")}
-})
+const validarPermisos = (req, res, next) => {
     try {
-      const schema = Joi.object({
-        email: Joi.string().min(6).max(100).required().email(),
-        password: Joi.string().min(6).max(30).required(),
-        username: Joi.string().min(6).max(30).required(),
-        fullname: Joi.string().min(6).max(200).required(),
-        cellphone: Joi.string().min(7).max(20).required(),
-        shippingAddress: Joi.string().min(6).max(200).required(),
-        roleId: Joi.number().integer().min(0).max(20),
-      });
-  
-      const validate = schema.validate(req.body);
-  
-      if (validate.error)
-        return res.status(400).json({ error: validate.error.message });
+      if (req.body.roleId !== ADMIN_IDROLE){
+         return res.status(403).json({ error: "No tiene permisos para realizar esta acción" }); 
+      }
       next();
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
-  }; */
-
-/* const validarSiExiste = (req, res, next) => {
-    const { id } = req.body;
-    next();
-    const i = productos.findIndex(p => {
-        return p.id == id;
-    });
-    if (i >= 0) {
-        return res.status(409).json('El id ingresado ya existe!');
-    }
-    return next();
-}
-
-const validarProducto = (req, res, next) => {
-    const { id, nombre, nombreCorto, precio } = req.body;
-    if (!id || !nombre || !nombreCorto || !precio) {
-        return res.status(404).json('Datos incompletos!');
-    }
-    return next();
-}
-
-function validarTipoDato(req, res, next) {
-    const { id, nombre, nombreCorto, precio } = req.body;
-    
-} */
+};
 
 module.exports = {
     validarLogin,
-    validateToken
-    /* validarSiExiste,
-    validarProducto,
+    validarCrearUsuario,
+    validarToken,
+    validarPermisos
+    /* validarProducto,
     validarTipoDato */
 };
