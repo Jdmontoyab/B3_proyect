@@ -1,5 +1,4 @@
 const express = require('express');
-//require("./database");
 
 const app = express();
 app.use(express.json());
@@ -14,5 +13,5 @@ app.use("/api/productos", rutaProductos);
 app.use("/api/pedidos", rutaPedidos);
 
 app.listen(port, () => {
-    console.log('Servidor iniciado en el puerto: ' + port);
+    console.log('Servidor corriendo en el puerto: ' + port);
 });

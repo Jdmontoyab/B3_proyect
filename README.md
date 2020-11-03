@@ -57,7 +57,7 @@ Método: POST (Login Usuario)
 URL: http://localhost:3000/api/usuarios/login
 
 Método: POST (Crear Usuario)
-http://localhost:3000/api/usuarios/crear
+URL: http://localhost:3000/api/usuarios/crear
 
 ## Productos
 

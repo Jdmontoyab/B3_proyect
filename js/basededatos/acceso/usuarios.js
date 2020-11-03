@@ -1,7 +1,6 @@
 const basededatos = require("../index");
 
 const encontrarPorUsuario = async (body) => {
-    console.log('Entró2');
     return await basededatos.sequelize.query(
         `SELECT * FROM USUARIOS WHERE USUARIO = "${body.usuario}";`,
         { type: basededatos.sequelize.QueryTypes.SELECT });

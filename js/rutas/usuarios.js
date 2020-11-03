@@ -34,7 +34,6 @@ router.post("/login", validarLogin, async (req, res) => {
 });
 
 router.post('/crear', validarCrearUsuario, async (req, res)=>{
-  //res.send('Puto cheto te queres matar');
   try {
     const usuario = await acceso.encontrarPorUsuario(req.body);
     if (usuario.length) {

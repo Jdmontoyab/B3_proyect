@@ -7,7 +7,7 @@ const validarLogin = (req, res, next) => {
     try {
         const { usuario, contrasena } = req.body;
         if (!usuario || !contrasena)
-            return res.status(400).json({ error: "Falta Usuario o Contraseña" });
+            return res.status(400).json({ error: "Falta usuario o contraseña" });
             next();
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -72,6 +72,4 @@ module.exports = {
     validarCrearUsuario,
     validarToken,
     validarPermisos
-    /* validarProducto,
-    validarTipoDato */
 };

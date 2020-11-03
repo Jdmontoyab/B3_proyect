@@ -50,7 +50,7 @@ router.delete("/:id", validarToken, validarPermisos, async (req, res) => {
       return res.status(404).json({ error: "El Producto buscado no existe!" });
     }
     await acceso.eliminar(id);
-    res.json({ message: "Producto Eliminado Correctamente" });
+    res.json({ message: "Producto eliminado correctamente" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

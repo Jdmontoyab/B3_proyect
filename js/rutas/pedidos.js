@@ -28,7 +28,6 @@ router.post("/crear", validarPedido, validarToken, async (req, res) => {
 });
 
 const descProductosPedido = async (productos) => {
-    //console.log(productos);
     const idsProductosPedido = productos.map((item) => item.id);
   
     const idsProductosRestaurante = (await accesoProductos.encontrarPorIds(idsProductosPedido)).map((item) => item.id);
@@ -37,7 +36,7 @@ const descProductosPedido = async (productos) => {
         let detallesError = idsProductosPedido.filter((item) => !idsProductosRestaurante.includes(item)).map((item) => {
             return {
                 id: item,
-                message: "El Producto no existe",
+                message: "El producto no existe",
             };
         });
         return { error: detallesError };

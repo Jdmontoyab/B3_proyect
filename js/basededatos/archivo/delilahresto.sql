@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS productos (
 
 INSERT INTO productos
 (descripcion, precio) 
-VALUES ("Hamburguesa", 500), ("Sanduche", 300);
+VALUES ("Pasta", 500), ("Pizza", 300);
 
 CREATE TABLE IF NOT EXISTS estados (
   id int NOT NULL AUTO_INCREMENT,
