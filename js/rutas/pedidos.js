@@ -10,7 +10,7 @@ const accesoDescPedido = require("../basededatos/acceso/desc_pedidos");
 
 const ADMIN_IDROLE = 2;
 
-router.post("/crear", validarPedido, validarToken, async (req, res) => {
+router.post("/crear_ped", validarPedido, validarToken, async (req, res) => {
     try {
         const validarProductos = await descProductosPedido(req.body.productos);
   
@@ -54,7 +54,7 @@ const crearDescPedido = async (id_pedido, productos) => {
     }
 };
 
-router.get("/", validarToken, async (req, res) => {
+router.get("/buscar_ped", validarToken, async (req, res) => {
     try {
       const { id_usuario, roleId } = req.body;
 
@@ -72,7 +72,7 @@ router.get("/", validarToken, async (req, res) => {
     }
 });
 
-router.get("/:id", validarToken, async (req, res) => {
+router.get("/buscar_ped/:id", validarToken, async (req, res) => {
     try {
       const { id } = req.params;
       const { roleId, id_usuario } = req.body;
@@ -91,7 +91,7 @@ router.get("/:id", validarToken, async (req, res) => {
     }
 });
 
-router.put("/:id", validarToken, validarPermisos, async (req, res) => {
+router.put("/act_ped/:id", validarToken, validarPermisos, async (req, res) => {
     try {
       const { id } = req.params;
       const { id_estado } = req.body;
@@ -114,7 +114,7 @@ router.put("/:id", validarToken, validarPermisos, async (req, res) => {
     }
 });
 
-router.delete("/:id", validarToken, validarPermisos, async (req, res) => {
+router.delete("/eli_ped/:id", validarToken, validarPermisos, async (req, res) => {
     try {
       const { id } = req.params;
   

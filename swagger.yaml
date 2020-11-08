@@ -15,7 +15,7 @@ tags:
 schemes:
 - "http"
 paths:
-  /crearProducto:
+  /crear_p:
     post:
       tags:
       - "Productos"
@@ -48,7 +48,7 @@ paths:
           description: "No tiene permisos para realizar esta acción"
         "500":
           description: "Error interno del servidor"
-  /consultarProductos:
+  /buscar_p:
     get:
       tags:
       - "Productos"
@@ -77,7 +77,7 @@ paths:
           description: "Acceso no autorizado"
         "500":
           description: "Error interno del servidor"      
-  /actualizarProducto:
+  /act_p:
     put:
       tags:
       - "Productos"
@@ -115,7 +115,7 @@ paths:
           description: "No tiene permisos para realizar esta acción"
         "500":
           description: "Error interno del servidor"
-  /eliminarProducto:
+  /eli_p:
     delete:
       tags:
       - "Productos"
@@ -147,7 +147,7 @@ paths:
           description: "No tiene permisos para realizar esta acción"
         "500":
           description: "Error interno del servidor"
-  /crearPedido:
+  /crear_ped:
     post:
       tags:
       - "Pedidos"
@@ -178,7 +178,7 @@ paths:
           description: "Acceso no autorizado"
         "500":
           description: "Error interno del servidor"
-  /consultarPedidos:
+  /buscar_ped:
     get:
       tags:
       - "Pedidos"
@@ -207,7 +207,7 @@ paths:
           description: "Acceso no autorizado"
         "500":
           description: "Error interno del servidor"
-  /actualizarPedido:
+  /act_ped:
     put:
       tags:
       - "Pedidos"
@@ -247,7 +247,7 @@ paths:
           description: "No tiene permisos para realizar esta acción"
         "500":
           description: "Error interno del servidor"
-  /eliminarPedido:
+  /eli_ped:
     delete:
       tags:
       - "Pedidos"
@@ -331,6 +331,31 @@ paths:
           description: "Datos de acceso inválidos"
         "409":
           description: "El usuario ya existe"
+        "500":
+          description: "Error interno del servidor"
+  /buscar:
+    get:
+      tags:
+      - "Usuarios"
+      summary: "Buscar Usuarios"
+      description: ""
+      operationId: "buscarUsuarios"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "token Bearer"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Usuarios consultados correctamente"
+        "400":
+          description: "Datos de acceso inválidos"
+        "401":
+          description: "No tiene permisos para realizar esta acción"
         "500":
           description: "Error interno del servidor"
 definitions:
@@ -474,4 +499,4 @@ definitions:
         format: "password"
 externalDocs:
   description: "Find out more DelilahResto"
-  url: "http://localhost:8000/" 
+  url: "http://localhost:3000/"

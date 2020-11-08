@@ -8,9 +8,9 @@ const rutaUsuarios = require("./rutas/usuarios");
 const rutaProductos = require("./rutas/productos");
 const rutaPedidos = require("./rutas/pedidos");
 
-app.use("/api/usuarios", rutaUsuarios);
-app.use("/api/productos", rutaProductos);
-app.use("/api/pedidos", rutaPedidos);
+app.use("/api", rutaUsuarios);
+app.use("/api", rutaProductos);
+app.use("/api", rutaPedidos);
 
 app.listen(port, () => {
     console.log('Servidor corriendo en el puerto: ' + port);

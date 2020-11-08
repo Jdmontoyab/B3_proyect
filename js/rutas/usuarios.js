@@ -1,11 +1,12 @@
 const router = require("express").Router();
 
-const { validarLogin, validarCrearUsuario } = require("../middlewares/usuarios");
+const { validarLogin, validarCrearUsuario, validarToken } = require("../middlewares/usuarios");
 
 const jwt = require("jsonwebtoken");
 const acceso = require("../basededatos/acceso/usuarios");
 
 const SECRET = "70k3n1d";
+const ADMIN_IDROLE = 2;
 
 router.post("/login", validarLogin, async (req, res) => {
   try {
@@ -44,6 +45,23 @@ router.post('/crear', validarCrearUsuario, async (req, res)=>{
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+});
+
+router.get("/buscar", validarToken, async (req, res) => {   
+  try {
+      const { roleId, id } = req.body;
+
+      let usuarios = null;
+  
+      if (roleId === ADMIN_IDROLE) {
+        usuarios = await acceso.encontrarUsuarios();
+      } else {
+        usuarios = await acceso.encontrarIdUsuario(id);
+      }
+      return res.json(usuarios);
+    } catch (error) {
+      res.status(401).json({ error: "No tiene permisos para realizar esta acción"});
+    }
 });
 
 module.exports = router;

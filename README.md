@@ -54,38 +54,41 @@ En el archivo swagger.yaml se encuentran los requerimientos que se deben enviar 
 ## Usuarios
 
 Método: POST (Login Usuario)
-URL: http://localhost:3000/api/usuarios/login
+URL: http://localhost:3000/api/login
 
 Método: POST (Crear Usuario)
-URL: http://localhost:3000/api/usuarios/crear
+URL: http://localhost:3000/api/crear
+
+Método: GET (Buscar Usuarios)
+URL: http://localhost:3000/api/buscar
 
 ## Productos
 
 Método: POST (Crear Productos)
-URL: http://localhost:3000/api/productos/
+URL: http://localhost:3000/api/crear_p
 
 Método: GET (Consultar Productos)
-URL: http://localhost:3000/api/productos/
-URL: http://localhost:3000/api/productos/id
+URL: http://localhost:3000/api/buscar_p/
+URL: http://localhost:3000/api/buscar_p/id
 
 Método: PUT (Actualizar Producto)
-URL: http://localhost:3000/api/productos/id
+URL: http://localhost:3000/api/act_p/id
 
 Método: DELETE (Eliminar Producto)
-URL: http://localhost:3000/api/productos/id
+URL: http://localhost:3000/api/eli_p/id
 
 ## Pedidos
 
 Método: POST (Crear Pedido)
-URL: http://localhost:3000/api/pedidos/crear
+URL: http://localhost:3000/api/crear_ped
 
 Método: GET (Consultar Pedidos)
-URL: http://localhost:3000/api/pedidos/
-URL: http://localhost:3000/api/pedidos/id
+URL: http://localhost:3000/api/buscar_ped
+URL: http://localhost:3000/api/buscar_ped/id
 
 Método: PUT (Actualizar Pedido)
-URL: http://localhost:3000/api/pedidos/id
+URL: http://localhost:3000/api/act_ped/id
 
 Método: DELETE (Eliminar Pedido)
-URL: http://localhost:3000/api/pedidos/id
+URL: http://localhost:3000/api/eli_ped/id
 

@@ -6,7 +6,7 @@ const { validarPeticion } = require("../middlewares/productos");
 
 const acceso = require("../basededatos/acceso/productos");
 
-router.post("/", validarPeticion, validarToken, validarPermisos, async (req, res) => {
+router.post("/crear_p", validarPeticion, validarToken, validarPermisos, async (req, res) => {
     try {
         await acceso.crearProducto(req.body);
         res.json(req.body);
@@ -16,7 +16,7 @@ router.post("/", validarPeticion, validarToken, validarPermisos, async (req, res
     }
 );
 
-router.get("/", validarToken, async (req, res) => {
+router.get("/buscar_p", validarToken, async (req, res) => {
   try {
     const productos = await acceso.encontrarTodos();
     res.json(productos);
@@ -25,7 +25,7 @@ router.get("/", validarToken, async (req, res) => {
   }
 });
 
-router.put("/:id", validarPeticion, validarToken, validarPermisos, async (req, res) => {
+router.put("/act_p/:id", validarPeticion, validarToken, validarPermisos, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -41,7 +41,7 @@ router.put("/:id", validarPeticion, validarToken, validarPermisos, async (req, r
   }
 );
 
-router.delete("/:id", validarToken, validarPermisos, async (req, res) => {
+router.delete("/eli_p/:id", validarToken, validarPermisos, async (req, res) => {
   try {
     const { id } = req.params;
 
